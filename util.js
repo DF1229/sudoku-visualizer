@@ -5,14 +5,14 @@ module.exports = {
         const body = req.body;
 
         if (body == null || body == undefined || body == {})
-            return res.sendStatus(http.status['Bad Request']);
+            return http.status['Bad Request'];
 
         const data = body.data;
         if (data == null || data == undefined || data == [] || data == {})
-            return res.sendStatus(http.status['Bad Request']);
+            return http.status['Bad Request'];
 
         if (data.length != 9)
-            return res.sendStatus(http.status['Bad Request']);
+            return http.status['Bad Request'];
 
         let fail = false;
         data.forEach(row => {
@@ -26,10 +26,14 @@ module.exports = {
         });
 
         if (fail) 
-            return res.sendStatus(http.status['Bad Request']);
+            return http.status['Bad Request'];
     },
     verifyGetRequest: (req, res) => {
         if (process.env.DATA == null || process.env.DATA == undefined)
-            return res.sendStatus(http.status['Not Found']);
+            return http.status['Not Found'];
+
+            let ds = JSON.parse(process.env.DATA);
+            if (!Number.isInteger(ds.data.length))
+                return http.status['Internal Server Error'];
     }
 }
