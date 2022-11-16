@@ -1,12 +1,14 @@
 # Sudoku visualizer
-A simple CLI sudoku visualizer
+A simple sudoku visualizer API
 
 ## API
-### Get
+### GET
+To generate a visualization of the dataset currently held in memory, send a `GET` request to the process.
 
+If a valid dataset is in memory at the time of the request, the API will return an HTML string.
 
-### Post
-To upload a dataset into the visualizer, send a `PUT` request to the process with the following criteria.
+### PUT
+To upload a dataset into the visualizer, send a `PUT` request which meets the following criteria.
 
 #### Headers
 - `Content-Type: application/json`
@@ -15,7 +17,7 @@ To upload a dataset into the visualizer, send a `PUT` request to the process wit
 - Must consist of a single object, with a single property called `data`, which is an array.
 - The `data` array must contain 9 unnamed arrays, which must have 9 numbers each.
 
-Each array inside the `data` array will be seen as a row of the sudoku, and each number in the inner arrays will be seen as a column.
+Each array inside the `data` array will be seen as a row of the sudoku, and each number in the inner arrays will be seen as a cell in the sudoku.
 
 Example body content:
 ```
@@ -34,4 +36,9 @@ Example body content:
 }
 ```
 
-Numbers must be an integer between 0 and 9, where 0 represents an empty cell, and numbers greater than 9 invalidate the request.
+Numbers must be an integer between 0 and 9, where 0 represents an empty cell, and numbers less than 0 or greater than 9 invalidate the request.
+
+### DELETE
+To delete the current dataset held in memory, send a `DELETE` request.
+
+The API will simply delete the dataset that is currently in memory, and return `200 OK`.
