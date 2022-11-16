@@ -34,4 +34,4 @@ Example body content:
 }
 ```
 
-Numbers must be between 0 and 9, where 0 represents an empty cell, and numbers greater than 9 invalidate the request.
+Numbers must be an integer between 0 and 9, where 0 represents an empty cell, and numbers greater than 9 invalidate the request.
