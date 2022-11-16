@@ -3,26 +3,38 @@ const http = require('./http');
 module.exports = {
     verifyPutRequest: (req, res) => {
         const body = req.body;
-        
+
         if (body == null || body == undefined || body == {})
-            res.sendStatus(http.status['Bad Request']);
-        
+            return res.sendStatus(http.status['Bad Request']);
+
         const data = body.data;
         if (data == null || data == undefined || data == [] || data == {})
-            res.sendStatus(http.status['Bad Request']);
+            return res.sendStatus(http.status['Bad Request']);
 
         if (data.length != 9)
-            res.sendStatus(http.status['Bad Request']);
-        
-        res.sendStatus(http.status['OK']);
+            return res.sendStatus(http.status['Bad Request']);
+
+        let fail = false;
+        data.forEach(row => {
+            row.forEach(cell => {
+                if (cell > 9 || cell < 0)
+                    fail = true;
+
+                if (!Number.isInteger(cell))
+                    fail = true;
+            });
+        });
+
+        if (fail) 
+            return res.sendStatus(http.status['Bad Request']);
     },
     verifyGetRequest: (req, res) => {
         if (process.env.DATA == null || process.env.DATA == undefined)
-            res.sendStatus(http.status['Bad Request']);
+            return res.sendStatus(http.status['Not Found']);
 
         if (process.env.DATA == {})
-            res.sendStatus(http.status['Service Unavailable']);
+            return res.sendStatus(http.status['Service Unavailable']);
 
-        res.sendStatus(http.status['Not Implemented']);
+        return res.sendStatus(http.status['Not Implemented']);
     }
 }
