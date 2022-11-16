@@ -34,7 +34,7 @@ const status = {
     "Payment Required": 402,
     "Forbidden": 403,
     "Not Found": 404,
-    "Method Not Allow": 405,
+    "Method Not Allowed": 405,
     "Not Acceptable": 406,
     "Proxy Authentication Required": 407,
     "Request Timeout": 408,
