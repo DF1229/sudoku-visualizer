@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,13 +10,45 @@
         div {
             margin: auto;
         }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            border-bottom: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+        }
+
+        tr:first-of-type {
+            border-left: none;
+        }
+
+        td:hover {
+            background-color: coral;
+        }
     </style>
 
     <title>Document</title>
 </head>
+
 <body>
     <div>
-        <%= JSON.stringify(locals.data) %>
+        <table>
+            <% locals.sudoku.data.forEach(row=> { %>
+                <tr>
+                    <% row.forEach(rawVal=> { %>
+                        <% let value=rawVal==0 ? ' ' : rawVal %>
+                            <td>
+                                <%= value %>
+                            </td>
+                            <% }) %>
+                </tr>
+                <% }) %>
+        </table>
     </div>
 </body>
+
 </html>

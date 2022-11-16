@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const visualizer = require('./visualizer');
 const http = require('./http');
 const util = require('./util');
 
@@ -18,7 +17,8 @@ router.route('/*')
         if (reqVal != http.status['OK'] && reqVal != undefined)
             return res.sendStatus(reqVal);
 
-        visualizer(req, res);
+        res.locals.sudoku = JSON.parse(process.env.DATA);
+        res.status(http.status['OK']).render('sudoku');
     })
     .delete((req, res) => {
         delete process.env.DATA;
