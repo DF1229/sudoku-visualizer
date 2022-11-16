@@ -31,10 +31,5 @@ module.exports = {
     verifyGetRequest: (req, res) => {
         if (process.env.DATA == null || process.env.DATA == undefined)
             return res.sendStatus(http.status['Not Found']);
-
-        if (process.env.DATA == {})
-            return res.sendStatus(http.status['Service Unavailable']);
-
-        return res.sendStatus(http.status['Not Implemented']);
     }
 }
