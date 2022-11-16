@@ -6,7 +6,7 @@ A simple CLI sudoku visualizer
 
 
 ### Post
-To upload a dataset into the visualizer, send a `POST` request to the process with the following criteria.
+To upload a dataset into the visualizer, send a `PUT` request to the process with the following criteria.
 
 #### Headers
 - `Content-Type: application/json`
@@ -33,3 +33,5 @@ Example body content:
     ]
 }
 ```
+
+Numbers must be between 0 and 9, where 0 represents an empty cell, and numbers greater than 9 invalidate the request.
